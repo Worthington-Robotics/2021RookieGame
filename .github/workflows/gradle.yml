@@ -1,13 +1,10 @@
 name: Java CI
 
 on: 
-  schedule:
-    - cron: 0 12 * * 0-6
   push:
     branches:
       - master
-      - RobotTest
-      - superstructure
+      - test
 
 
 jobs:
