@@ -2,7 +2,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.statemachine.StateMachineDescriptor;
-import frc.robot.autoactiongroups.*;
 
 /**
  * @author Cole Tucker This enum encompasses all user selectable autonomous
@@ -82,16 +81,6 @@ public class AutoSelector {
         UserSelection usrAuto = getSelFromStr(selection);
         SmartDashboard.putString("Final Auto Choice", usrAuto.toString());
         switch (usrAuto) {
-            case Auto1:
-                return new EightBallAuto();
-            case Auto8:
-                return new NoSkew();
-            case Auto9:
-                return new NoSkew();
-            case Auto10:
-                return new Barrel();
-            case Auto11:
-                return new BoingBoing();
             default:
                 return null;
         }

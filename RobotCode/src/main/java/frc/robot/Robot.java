@@ -21,12 +21,6 @@ import frc.lib.util.DriveSignal;
 import frc.lib.util.POVTrigger;
 import frc.lib.util.VersionData;
 import frc.robot.subsystems.*;
-import frc.robot.actions.driveactions.*;
-import frc.robot.actions.climberactions.*;
-import frc.robot.actions.colorwheelactions.nextLight;
-import frc.robot.actions.shooteraction.*;
-import frc.robot.actions.superaction.*;
-import frc.robot.actions.waitactions.SoutAction;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -81,14 +75,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        manager = new SubsystemManager(Arrays.asList(
-            // register subsystems here
-            PoseEstimator.getInstance(), 
-            Drive.getInstance(),
-            Shooter.getInstance(),
-            Lights.getInstance(),
-            // Superstructure.getInstance(),
-            JetsonAILink.getInstance()),
+        manager = new SubsystemManager(Arrays.asList(),
              true);
 
         // create the master looper threads
@@ -126,8 +113,6 @@ public class Robot extends TimedRobot {
         enabledLooper.stop();
 
         StateMachine.getInstance().assertStop();
-        Superstructure.getInstance().setInit();
-        Shooter.getInstance().setRampUp();
 
         disabledLooper.start();
     }
@@ -148,10 +133,6 @@ public class Robot extends TimedRobot {
         disabledLooper.stop();
 
         //reset anything here
-        //Shooter.getInstance().softStart();
-        Drive.getInstance().reset(); 
-        PoseEstimator.getInstance().reset();
-        Superstructure.getInstance().reset();
 
         enabledLooper.start();
 
@@ -176,7 +157,6 @@ public class Robot extends TimedRobot {
         disabledLooper.stop();
 
         //reset anything here
-        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
         Constants.WHEELS = SmartDashboard.getBoolean("inputKeyHere", Constants.WHEELS);
         initButtons();
         enabledLooper.start();
@@ -196,10 +176,6 @@ public class Robot extends TimedRobot {
         disabledLooper.stop();
 
         //reset anything here
-        Drive.getInstance().reset();
-        PoseEstimator.getInstance().reset();
-        //Shooter.getInstance().disable();
-        //Superstructure.getInstance().reset();
 
         enabledLooper.start();
     }
@@ -214,39 +190,5 @@ public class Robot extends TimedRobot {
 
     public void initButtons(){
         // create buttons and register actions
-        if(Constants.WHEELS)
-        {
-        reverse.whileHeld(Action.toCommand(new Inverse()));
-        shiftUp.whileHeld(Action.toCommand(new Shift()));
-        shiftDown.whileHeld(Action.toCommand(new DownShift()));
-        shootAll.whileHeld(Action.toCommand(new ShootAllAction()));
-        wheelIntake.whileHeld(Action.toCommand(new IntakeAction()));
-        gyroLock.whileHeld(Action.toCommand(new GyroLock()));
-        nextLight.whenPressed(Action.toCommand(new nextLight()));
-        flywheelManual.whenPressed(Action.toCommand(new SetManualFlywheel()));
-        wheelTargeting.whileHeld(Action.toCommand(new TurretPIDControl()));
-        wheelIntakeArm.toggleWhenPressed(Action.toCommand(new ToggleIntake()));
-    }
-        // turnLockout.whileHeld(Action.toCommand(new TurnLockout(true)));
-        DownshiftTrigger.whileHeld(Action.toCommand(new DownShift()));
-        OffsetUp.whenPressed(Action.toCommand(new OffsetIncrease()));
-        OffsetDown.whenPressed(Action.toCommand(new OffsetDecrease()));
-        recenter.whileHeld(Action.toCommand(new Recenter(0)));
-        fieldCentricTurret.whenPressed(Action.toCommand(new FieldCentricTurret()));
-        turretPIDControl.whileHeld(Action.toCommand(new TurretPIDControl()));
-        dump.whileHeld(Action.toCommand(new DumpAction()));
-        manualFlyWheel.whenPressed(Action.toCommand(new SetManualFlywheel()));
-        inverse.whileHeld(Action.toCommand(new Inverse()));
-        shiftButton.whileHeld(Action.toCommand(new Shift()));
-        gyrPovTrigger.whileHeld(Action.toCommand(new GyroLock()));
-        shootOne.whenPressed(Action.toCommand(new ShootBallAction()));
-        intake.whileHeld(Action.toCommand(new IntakeAction()));
-        folder.toggleWhenPressed(Action.toCommand(new FolderToggleAction()));
-        climber.toggleWhenPressed(Action.toCommand(new ClimberToggleAction()));
-        limelightRPM.whenPressed(Action.toCommand(new softStart()));
-        intakeUP.toggleWhenPressed(Action.toCommand(new ToggleIntake()));
-        shootOne.whileActive(Action.toCommand(new ShootAllAction()));
-        VersionData.WriteBuildInfoToDashboard();
-
     }
 }
