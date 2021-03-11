@@ -1,0 +1,85 @@
+\hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}{}\doxysection{frc.\+lib.\+statemachine.\+Action\+Group Class Reference}
+\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup}\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}{on\+Start}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a43efabbf3b9971b9b4439ecfbfb7026f}{on\+Loop}} ()
+\item 
+boolean \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a09b32ff1157e95f6f066ee841c61fcd9}{is\+Finished}} ()
+\item 
+void \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}{on\+Stop}} ()
+\item 
+String \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_ae042178ccfb62127c54c64a3e9367f2c}{to\+String}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Linked\+List$<$ \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action}{Action}} $>$ \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a9537c76a7e0dd0eccc272fda845dd4b9}{group}}
+\item 
+double \mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_abfcbd863d5b513d6d927a7b219afbb2b}{t\+\_\+\+Start}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a09b32ff1157e95f6f066ee841c61fcd9}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a09b32ff1157e95f6f066ee841c61fcd9}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!isFinished@{isFinished}}
+\index{isFinished@{isFinished}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{isFinished()}{isFinished()}}
+{\footnotesize\ttfamily boolean frc.\+lib.\+statemachine.\+Action\+Group.\+is\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Determines if the state is ready to be advanced. This can happen forcefully on a timeout or if all action in the group time out individually. 
+
+This also handles calling the stop code on actions who have completed independently.
+
+\begin{DoxyReturn}{Returns}
+true if all actions in the group have finished or if they should be forcibly timed out 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a43efabbf3b9971b9b4439ecfbfb7026f}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a43efabbf3b9971b9b4439ecfbfb7026f}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!onLoop@{onLoop}}
+\index{onLoop@{onLoop}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{onLoop()}{onLoop()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+Action\+Group.\+on\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Runs the on-\/loop code for each action in the group. \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a442afe17387ad6b287bf92d33230521a}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!onStart@{onStart}}
+\index{onStart@{onStart}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+Action\+Group.\+on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Runs the on-\/start code for each action in the group. Also records the start time of state \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a868e7c94b2ed2d18f4c33c3fb55d9c96}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!onStop@{onStop}}
+\index{onStop@{onStop}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{onStop()}{onStop()}}
+{\footnotesize\ttfamily void frc.\+lib.\+statemachine.\+Action\+Group.\+on\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+forcibly terminate all actions within the group \mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_ae042178ccfb62127c54c64a3e9367f2c}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_ae042178ccfb62127c54c64a3e9367f2c}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!toString@{toString}}
+\index{toString@{toString}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily String frc.\+lib.\+statemachine.\+Action\+Group.\+to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+gets a string representation of the class names inside the action group \begin{DoxyReturn}{Returns}
+a string of all class names in the group 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a9537c76a7e0dd0eccc272fda845dd4b9}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_a9537c76a7e0dd0eccc272fda845dd4b9}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!group@{group}}
+\index{group@{group}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{group}{group}}
+{\footnotesize\ttfamily Linked\+List$<$\mbox{\hyperlink{classfrc_1_1lib_1_1statemachine_1_1Action}{Action}}$>$ frc.\+lib.\+statemachine.\+Action\+Group.\+group\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_abfcbd863d5b513d6d927a7b219afbb2b}\label{classfrc_1_1lib_1_1statemachine_1_1ActionGroup_abfcbd863d5b513d6d927a7b219afbb2b}} 
+\index{frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}!t\_Start@{t\_Start}}
+\index{t\_Start@{t\_Start}!frc.lib.statemachine.ActionGroup@{frc.lib.statemachine.ActionGroup}}
+\doxysubsubsection{\texorpdfstring{t\_Start}{t\_Start}}
+{\footnotesize\ttfamily double frc.\+lib.\+statemachine.\+Action\+Group.\+t\+\_\+\+Start\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Robot\+Code/src/main/java/frc/lib/statemachine/\mbox{\hyperlink{ActionGroup_8java}{Action\+Group.\+java}}\end{DoxyCompactItemize}
