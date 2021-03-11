@@ -1,1 +1,1 @@
-This is the rookie's 2021 game code.
+This is the Rookie 2021 game code.
