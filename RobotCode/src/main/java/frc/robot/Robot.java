@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
     private Looper enabledLooper, disabledLooper;
     
     //Master joystick buttons
-   // private JoystickButton intakeExtensionButton = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton intakeExtensionButton = new JoystickButton(Constants.MASTER, 1);
     private JoystickButton ballGateButton = new JoystickButton(Constants.MASTER, 2);
     private JoystickButton shooterMotorButton = new JoystickButton(Constants.MASTER, 3);
     private JoystickButton intakeAMotorButton = new JoystickButton(Constants.MASTER, 4);
@@ -193,7 +193,7 @@ public class Robot extends TimedRobot {
     }
 
     public void initButtons(){
-        //intakeExtensionButton.whileHeld(Action.toCommand(new IntakeExtensionAction()));
+        intakeExtensionButton.whileHeld(Action.toCommand(new IntakeExtensionAction()));
         ballGateButton.whileHeld(Action.toCommand(new BallGateAction()));
         shooterMotorButton.whileHeld(Action.toCommand(new ShooterAction()));
         intakeAMotorButton.whileHeld(Action.toCommand(new IntakeMotorAction()));
