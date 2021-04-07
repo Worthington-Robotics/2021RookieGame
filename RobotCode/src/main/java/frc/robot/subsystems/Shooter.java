@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,8 +17,8 @@ import javax.naming.ldap.Control;
 
 public class Shooter extends Subsystem {
     PeriodicIO periodicIO;
-    DoubleSolenoid ballGate;
-    DoubleSolenoid intakeExtension;
+    TalonSRX ballGate;
+   // DoubleSolenoid intakeExtension;
     TalonSRX intakeMotor;
     TalonSRX shooterMotorLeft;
     TalonSRX shooterMotorRight;
@@ -24,9 +26,12 @@ public class Shooter extends Subsystem {
 
 
     private Shooter() {
+       // intakeExtension = new DoubleSolenoid(Constants.SHOOTER_HIGH_ID, Constants.SHOOTER_LOW_ID);
         intakeMotor = new TalonSRX(Constants.ID_SUPER_INTAKE);
         shooterMotorLeft = new TalonSRX(Constants.SHOOTER_FLYWHEEL_LEFT);
         shooterMotorRight = new TalonSRX(Constants.SHOOTER_FLYWHEEL_RIGHT);
+       // ballGate = new TalonSRX(Constants.SHOOTER_LOW_ID);
+        reset();
     }
 
     public static Shooter getInstance() {
@@ -93,8 +98,8 @@ public class Shooter extends Subsystem {
      * Writes the periodic outputs to actuators (motors and ect...)
      */
     public void writePeriodicOutputs() {
-        ballGate.set(periodicIO.extendedBallGate);
-        intakeExtension.set(periodicIO.extendedIntake);
+        //ballGate.set(periodicIO.extendedBallGate);
+        //intakeExtension.set(periodicIO.extendedIntake);
         intakeMotor.set(ControlMode.PercentOutput, periodicIO.intakeMotorPower);
         shooterMotorLeft.set(ControlMode.PercentOutput, periodicIO.shooterMotorLeftPower);
         shooterMotorRight.set(ControlMode.PercentOutput, periodicIO.shooterMotorRightPower);
@@ -155,8 +160,8 @@ public class Shooter extends Subsystem {
     public class PeriodicIO extends Logable.LogData {
         public double[] operatorInput = {0, 0, 0};
 
-        DoubleSolenoid.Value extendedBallGate = DoubleSolenoid.Value.kReverse;
-        DoubleSolenoid.Value extendedIntake = DoubleSolenoid.Value.kReverse;
+       // DoubleSolenoid.Value extendedBallGate = TalonSRXControlMode;
+        //DoubleSolenoid.Value extendedIntake = DoubleSolenoid.Value.kReverse;
         public double intakeMotorPower;
         public double shooterMotorLeftPower;
         public double shooterMotorRightPower;
