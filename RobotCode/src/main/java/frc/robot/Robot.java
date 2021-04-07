@@ -75,7 +75,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        manager = new SubsystemManager(Arrays.asList(),
+        manager = new SubsystemManager(Arrays.asList( 
+            Drive.getInstance()),
              true);
 
         // create the master looper threads

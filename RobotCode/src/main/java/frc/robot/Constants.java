@@ -15,8 +15,10 @@ public class Constants {
     public static final int PIGION_ID = 0;
 
     //Talon SRX & FX IDs
-    public static final int DRIVE_BACK_LEFT_ID = 1;
-    public static final int DRIVE_FRONT_LEFT_ID = 2;
+    public static final int DRIVE_FRONT_RIGHT_ID = 1;
+    public static final int DRIVE_BACK_RIGHT_ID = 2;
+    public static final int DRIVE_BACK_LEFT_ID = 3;
+    public static final int DRIVE_FRONT_LEFT_ID = 4;
     public static final int SHOOTER_FLYWHEEL_LEFT = 5;
     public static final int SHOOTER_FLYWHEEL_RIGHT = 6;
 
@@ -27,8 +29,6 @@ public class Constants {
     public static final int ID_SUPER_INTAKE = 11;
 
     public static final int TURRET_CONTROL = 12;
-    public static final int DRIVE_FRONT_RIGHT_ID = 14;
-    public static final int DRIVE_BACK_RIGHT_ID = 15;
 
     // TOF IDs
     public static final int ID_SUPER_TOF1 = 1;
