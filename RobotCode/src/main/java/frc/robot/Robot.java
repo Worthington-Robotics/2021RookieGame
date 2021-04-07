@@ -15,10 +15,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.Action;
 import frc.lib.statemachine.StateMachine;
-import frc.robot.Actions.BallGateAction;
-import frc.robot.Actions.IntakeExtensionAction;
-import frc.robot.Actions.IntakeMotorAction;
-import frc.robot.Actions.ShooterAction;
+import frc.lib.util.AxisAction;
+import frc.lib.util.DebouncedJoystickButton;
+import frc.lib.util.DriveSignal;
+import frc.lib.util.POVTrigger;
+import frc.lib.util.VersionData;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,43 +34,40 @@ public class Robot extends TimedRobot {
     private Looper enabledLooper, disabledLooper;
     
     //Master joystick buttons
-    private JoystickButton intakeExtensionButton = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton ballGateButton = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton shooterMotorButton = new JoystickButton(Constants.MASTER, 3);
-    private JoystickButton intakeAMotorButton = new JoystickButton(Constants.MASTER, 4);
+    private JoystickButton gyrPovTrigger = new JoystickButton(Constants.MASTER, 10);
     //private JoystickButton turnLockout = new JoystickButton(Constants.MASTER, 4);
-//    private JoystickButton DownshiftTrigger = new JoystickButton(Constants.MASTER, 9);
-//    private JoystickButton shiftButton = new JoystickButton(Constants.MASTER, 1);
-//    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 2);
-//    private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
-//    private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
+    private JoystickButton DownshiftTrigger = new JoystickButton(Constants.MASTER, 9);
+    private JoystickButton shiftButton = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton inverse = new JoystickButton(Constants.MASTER, 2);
+    private DebouncedJoystickButton folder = new DebouncedJoystickButton(Constants.MASTER, 5);
+    private DebouncedJoystickButton climber = new DebouncedJoystickButton(Constants.MASTER, 6);
     
 
     //Co-pilot joystick buttons
-//    private POVTrigger recenter = new POVTrigger(Constants.SECOND);
-//    private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
-//    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
-//    private JoystickButton fieldCentricTurret = new JoystickButton(Constants.SECOND, 3);
-//    private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
-//    private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
-//    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
-//    private DebouncedJoystickButton intakeUP = new DebouncedJoystickButton(Constants.SECOND, 9);
-//    private JoystickButton OffsetUp = new JoystickButton(Constants.SECOND, 10);
-//    private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
-//    private JoystickButton OffsetDown = new JoystickButton(Constants.SECOND, 12);
+    private POVTrigger recenter = new POVTrigger(Constants.SECOND);
+    private JoystickButton shootOne = new JoystickButton(Constants.SECOND, 1);
+    private JoystickButton turretPIDControl = new JoystickButton(Constants.SECOND, 2);
+    private JoystickButton fieldCentricTurret = new JoystickButton(Constants.SECOND, 3);
+    private JoystickButton dump = new JoystickButton(Constants.SECOND, 4);
+    private JoystickButton limelightRPM = new JoystickButton(Constants.SECOND, 5);
+    private JoystickButton manualFlyWheel = new JoystickButton(Constants.SECOND, 6);
+    private DebouncedJoystickButton intakeUP = new DebouncedJoystickButton(Constants.SECOND, 9);
+    private JoystickButton OffsetUp = new JoystickButton(Constants.SECOND, 10);
+    private JoystickButton intake = new JoystickButton(Constants.SECOND, 11);
+    private JoystickButton OffsetDown = new JoystickButton(Constants.SECOND, 12);
 
     
     //Wheel buttons
-//    private AxisAction reverse = new AxisAction(Constants.WHEEL, 3, .5, false);
-//    private AxisAction nextLight = new AxisAction(Constants.WHEEL, 2, .8, false);
-//    private JoystickButton flywheelManual = new JoystickButton(Constants.WHEEL, 1);
-//    private JoystickButton shiftUp = new JoystickButton(Constants.WHEEL, 5);
-//    private JoystickButton shiftDown = new JoystickButton(Constants.WHEEL, 6);
-//    private JoystickButton gyroLock = new JoystickButton(Constants.WHEEL, 2);
-//    private JoystickButton shootAll = new JoystickButton(Constants.WHEEL, 3);
-//    private JoystickButton wheelIntake = new JoystickButton(Constants.WHEEL, 4);
-//    private JoystickButton wheelTargeting = new JoystickButton(Constants.WHEEL, 10);
-//    private JoystickButton wheelIntakeArm = new JoystickButton(Constants.WHEEL, 8);
+    private AxisAction reverse = new AxisAction(Constants.WHEEL, 3, .5, false);
+    private AxisAction nextLight = new AxisAction(Constants.WHEEL, 2, .8, false);
+    private JoystickButton flywheelManual = new JoystickButton(Constants.WHEEL, 1);
+    private JoystickButton shiftUp = new JoystickButton(Constants.WHEEL, 5);
+    private JoystickButton shiftDown = new JoystickButton(Constants.WHEEL, 6);
+    private JoystickButton gyroLock = new JoystickButton(Constants.WHEEL, 2);
+    private JoystickButton shootAll = new JoystickButton(Constants.WHEEL, 3);
+    private JoystickButton wheelIntake = new JoystickButton(Constants.WHEEL, 4);
+    private JoystickButton wheelTargeting = new JoystickButton(Constants.WHEEL, 10);
+    private JoystickButton wheelIntakeArm = new JoystickButton(Constants.WHEEL, 8);
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -190,9 +189,6 @@ public class Robot extends TimedRobot {
     }
 
     public void initButtons(){
-        intakeExtensionButton.whileHeld(Action.toCommand(new IntakeExtensionAction()));
-        ballGateButton.whileHeld(Action.toCommand(new BallGateAction()));
-        shooterMotorButton.whileHeld(Action.toCommand(new ShooterAction()));
-        intakeAMotorButton.whileHeld(Action.toCommand(new IntakeMotorAction()));
+        // create buttons and register actions
     }
 }
