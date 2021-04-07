@@ -41,14 +41,14 @@ public class Constants {
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 7;
     
-    public static final int UNFOLD_LOW_ID = 4;
-    public static final int UNFOLD_HIGH_ID = 3;
+    //public static final int UNFOLD_LOW_ID = 4;
+    //public static final int UNFOLD_HIGH_ID = 3;
 
-    public static final int CLIMB_LOW_ID = 2; //Do Not Change
-    public static final int CLIMB_HIGH_ID = 5; //Do Not Change
+    //public static final int CLIMB_LOW_ID = 2; //Do Not Change
+    //public static final int CLIMB_HIGH_ID = 5; //Do Not Change
     
-    public static final int INTAKE_LOW_ID = 6;
-    public static final int INTAKE_HIGH_ID = 1;
+    public static final int SHOOTER_LOW_ID = 6;
+    public static final int SHOOTER_HIGH_ID = 1;
     //Color Sensor Port
     public static final int COLOR_SENSOR_PORT = 1;
     
