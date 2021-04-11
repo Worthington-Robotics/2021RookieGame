@@ -33,10 +33,10 @@ public class Robot extends TimedRobot {
     private Looper enabledLooper, disabledLooper;
     
     //Master joystick buttons
-    private JoystickButton intakeExtensionButton = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton ballGateButton = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton shooterMotorButton = new JoystickButton(Constants.MASTER, 3);
-    private JoystickButton intakeAMotorButton = new JoystickButton(Constants.MASTER, 4);
+    //private JoystickButton intakeExtensionButton = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton ballGateButton = new JoystickButton(Constants.MASTER, 1);
+    private JoystickButton shooterMotorButton = new JoystickButton(Constants.MASTER, 2);
+    private JoystickButton intakeAMotorButton = new JoystickButton(Constants.MASTER, 3);
     //private JoystickButton turnLockout = new JoystickButton(Constants.MASTER, 4);
 //    private JoystickButton DownshiftTrigger = new JoystickButton(Constants.MASTER, 9);
 //    private JoystickButton shiftButton = new JoystickButton(Constants.MASTER, 1);

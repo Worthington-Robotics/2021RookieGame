@@ -17,8 +17,7 @@ import javax.naming.ldap.Control;
 
 public class Shooter extends Subsystem {
     PeriodicIO periodicIO;
-    TalonSRX ballGate;
-   // DoubleSolenoid intakeExtension;
+    TalonSRX ballGateMotor;
     TalonSRX intakeMotor;
     TalonSRX shooterMotorLeft;
     TalonSRX shooterMotorRight;
@@ -26,11 +25,10 @@ public class Shooter extends Subsystem {
 
 
     private Shooter() {
-       // intakeExtension = new DoubleSolenoid(Constants.SHOOTER_HIGH_ID, Constants.SHOOTER_LOW_ID);
         intakeMotor = new TalonSRX(Constants.ID_SUPER_INTAKE);
         shooterMotorLeft = new TalonSRX(Constants.SHOOTER_FLYWHEEL_LEFT);
         shooterMotorRight = new TalonSRX(Constants.SHOOTER_FLYWHEEL_RIGHT);
-       // ballGate = new TalonSRX(Constants.SHOOTER_LOW_ID);
+        ballGateMotor = new TalonSRX(Constants.ID_SUPER_DELIVERY_WHEEL);
         reset();
     }
 
@@ -64,14 +62,14 @@ public class Shooter extends Subsystem {
                         if (!periodicIO.wantIntake) {
                             periodicIO.state = IndexerState.IDLE_STATE;
                         }
-                        //case idle state: nothing will happen and the double solenoid is forward so the ball won't enter the shooter
+                        //case idle state: nothing will happen and the motor is off the ball won't enter the shooter
                     case IDLE_STATE:
                         if (periodicIO.shooterWantBall) {
                             periodicIO.state = IndexerState.SHOOT_STATE;
                         } else if (periodicIO.wantIntake) {
                             periodicIO.state = IndexerState.INTAKE_STATE;
                         }
-                        //case shoot state: the double solenoid is reverse so a ball can be entered into the shooter
+                        //case shoot state: the motor is on so a ball can be entered into the shooter
                     case SHOOT_STATE:
                         if (!periodicIO.shooterWantBall) {
                             periodicIO.state = IndexerState.IDLE_STATE;
@@ -80,8 +78,7 @@ public class Shooter extends Subsystem {
                 }
             }
 
-            //the double solenoid is either forward or reverse
-            //5 outputs: double solenoid for intake, double solenoid for ball gate, motor for intake, and two motors for the shooter
+        
             @Override
             public void onStart(double timestamp) {
 
@@ -98,11 +95,10 @@ public class Shooter extends Subsystem {
      * Writes the periodic outputs to actuators (motors and ect...)
      */
     public void writePeriodicOutputs() {
-        //ballGate.set(periodicIO.extendedBallGate);
-        //intakeExtension.set(periodicIO.extendedIntake);
         intakeMotor.set(ControlMode.PercentOutput, periodicIO.intakeMotorPower);
         shooterMotorLeft.set(ControlMode.PercentOutput, periodicIO.shooterMotorLeftPower);
         shooterMotorRight.set(ControlMode.PercentOutput, periodicIO.shooterMotorRightPower);
+        ballGateMotor.set(ControlMode.PercentOutput, periodicIO.ballGateMotorPower);
     }
 
     /**
@@ -114,6 +110,7 @@ public class Shooter extends Subsystem {
         SmartDashboard.putNumber("Intake Motor Power: ", periodicIO.intakeMotorPower);
         SmartDashboard.putNumber("Shooter's Left Motor Power", periodicIO.shooterMotorLeftPower);
         SmartDashboard.putNumber("Shooter's Right Motor Power", periodicIO.shooterMotorRightPower);
+        SmartDashboard.putNumber("Ball Gate Motor Power", periodicIO.ballGateMotorPower);
     }
 
     /**
@@ -145,6 +142,8 @@ public class Shooter extends Subsystem {
 
     public void setIntakePower(double intakeDemand){ periodicIO.intakeMotorPower = intakeDemand;}
 
+    public void setBallGatePower(double ballGateDemand) { periodicIO.ballGateMotorPower = ballGateDemand;}
+
 
     public enum IndexerState {
         DISABLED, INTAKE_STATE, IDLE_STATE, SHOOT_STATE;
@@ -160,11 +159,10 @@ public class Shooter extends Subsystem {
     public class PeriodicIO extends Logable.LogData {
         public double[] operatorInput = {0, 0, 0};
 
-       // DoubleSolenoid.Value extendedBallGate = TalonSRXControlMode;
-        //DoubleSolenoid.Value extendedIntake = DoubleSolenoid.Value.kReverse;
         public double intakeMotorPower;
         public double shooterMotorLeftPower;
         public double shooterMotorRightPower;
+        public double ballGateMotorPower;
 
         public IndexerState state = IndexerState.DISABLED;
         public boolean shooterWantBall;

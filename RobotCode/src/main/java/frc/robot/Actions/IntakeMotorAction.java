@@ -13,7 +13,7 @@ public class IntakeMotorAction extends Action {
 
     @Override
     public void onLoop() {
-        Shooter.getInstance().setShooterPower(Constants.ID_SUPER_INTAKE);
+        Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
     }
 
     @Override
