@@ -34,9 +34,9 @@ public class Robot extends TimedRobot {
     
     //Master joystick buttons
     //private JoystickButton intakeExtensionButton = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton ballGateButton = new JoystickButton(Constants.MASTER, 1);
-    private JoystickButton shooterMotorButton = new JoystickButton(Constants.MASTER, 2);
-    private JoystickButton intakeAMotorButton = new JoystickButton(Constants.MASTER, 3);
+    private JoystickButton ballGateButton = new JoystickButton(Constants.MASTER, Constants.BALL_GATE_BUTTON_ID);
+    private JoystickButton intakeAMotorButton = new JoystickButton(Constants.MASTER, Constants.INTAKE_BUTTON_ID);
+    //private JoystickButton shooterMotorButton = new JoystickButton(Constants.MASTER, 3);
     //private JoystickButton turnLockout = new JoystickButton(Constants.MASTER, 4);
 //    private JoystickButton DownshiftTrigger = new JoystickButton(Constants.MASTER, 9);
 //    private JoystickButton shiftButton = new JoystickButton(Constants.MASTER, 1);
@@ -193,9 +193,9 @@ public class Robot extends TimedRobot {
     }
 
     public void initButtons(){
-        intakeExtensionButton.whileHeld(Action.toCommand(new IntakeExtensionAction()));
+        //intakeExtensionButton.whileHeld(Action.toCommand(new IntakeExtensionAction()));
         ballGateButton.whileHeld(Action.toCommand(new BallGateAction()));
-        shooterMotorButton.whileHeld(Action.toCommand(new ShooterAction()));
+        //shooterMotorButton.whileHeld(Action.toCommand(new ShooterAction()));
         intakeAMotorButton.whileHeld(Action.toCommand(new IntakeMotorAction()));
     }
 }

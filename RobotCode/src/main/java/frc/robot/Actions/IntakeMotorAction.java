@@ -8,12 +8,14 @@ public class IntakeMotorAction extends Action {
 
     @Override
     public void onStart() {
-        Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
+        // Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
+        Shooter.getInstance().setWantIntake(true);
     }
 
     @Override
     public void onLoop() {
-        Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
+        // Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
+        Shooter.getInstance().setWantIntake(true);
     }
 
     @Override
@@ -23,6 +25,6 @@ public class IntakeMotorAction extends Action {
 
     @Override
     public void onStop() {
-        Shooter.getInstance().setIntakePower(0);
+        Shooter.getInstance().setWantIntake(false);
     }
 }

@@ -59,6 +59,8 @@ public class Constants {
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
     public static final Joystick WHEEL = new Joystick(2);
+    public static final int BALL_GATE_BUTTON_ID = 1;
+    public static final int INTAKE_BUTTON_ID = 2;
     public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0, 0.65, -1, 0.4, 2); 
     //The reason for these negative signs on the Y-axis
     // is because the sticks we use are designed for plane sims where pulling back on the stick sends you up
