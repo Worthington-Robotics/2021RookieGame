@@ -1,19 +1,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.lib.drivers.SimTimeOfFlight;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.HIDHelper;
 import frc.lib.util.Logable;
 import frc.robot.Constants;
-
-import javax.naming.ldap.Control;
 
 public class Shooter extends Subsystem {
     PeriodicIO periodicIO;
@@ -59,15 +53,17 @@ public class Shooter extends Subsystem {
                 switch (periodicIO.state) {
                     //case intake state: a ball will be intake
                     case INTAKE_STATE:
-                    Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
-                        if (!periodicIO.wantIntake) {
+                   // Shooter.getInstance().setIntakePower(Constants.ID_SUPER_INTAKE);
+                        if (!periodicIO.wantIntake && !periodicIO.shooterWantBall) {
                             periodicIO.state = IndexerState.IDLE_STATE;
+                        } else if (!periodicIO.wantIntake && periodicIO.shooterWantBall){
+                            periodicIO.state = IndexerState.SHOOT_STATE;
                         }
                     //case idle state: nothing will happen and the motor is off the ball won't enter the shooter
                     case IDLE_STATE:
-                    Shooter.getInstance().setIntakePower(0);
-                    Shooter.getInstance().setBallGatePower(0);
-                    Shooter.getInstance().setShooterPower(0);
+                    // Shooter.getInstance().setIntakePower(0);
+                    // Shooter.getInstance().setBallGatePower(0);
+                    // Shooter.getInstance().setShooterPower(0);
                         if (periodicIO.shooterWantBall) {
                             periodicIO.state = IndexerState.SHOOT_STATE;
                         } else if (periodicIO.wantIntake) {
@@ -75,10 +71,12 @@ public class Shooter extends Subsystem {
                         }
                     //case shoot state: the motor is on so a ball can be entered into the shooter
                     case SHOOT_STATE:
-                    Shooter.getInstance().setBallGatePower(Constants.ID_SUPER_DELIVERY_WHEEL);
-                    Shooter.getInstance().setShooterPower(Constants.SHOOTER_FLYWHEEL_LEFT);
-                        if (!periodicIO.shooterWantBall) {
+                    // Shooter.getInstance().setBallGatePower(Constants.ID_SUPER_DELIVERY_WHEEL);
+                    // Shooter.getInstance().setShooterPower(Constants.SHOOTER_FLYWHEEL_LEFT);
+                        if (!periodicIO.shooterWantBall && !periodicIO.wantIntake) {
                             periodicIO.state = IndexerState.IDLE_STATE;
+                        } else if (!periodicIO.shooterWantBall && periodicIO.wantIntake){
+                            periodicIO.state = IndexerState.SHOOT_STATE;
                         }
                         break;
                 }
